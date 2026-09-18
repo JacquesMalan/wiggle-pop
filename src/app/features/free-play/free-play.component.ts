@@ -18,6 +18,7 @@ export class FreePlayComponent implements AfterViewInit, OnDestroy {
   private static readonly SCORE_MOODS = ['Little chaos', 'Getting serious', 'Bigger smash', 'Mega mash', 'Smash legend'];
   @ViewChild('playground', { static: true }) private readonly playground!: ElementRef<HTMLElement>;
   @ViewChild('canvas', { static: true }) private readonly canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('mobileKeyboard', { static: true }) private readonly mobileKeyboard!: ElementRef<HTMLInputElement>;
   private readonly interaction = inject(InteractionService);
   private readonly audio = inject(AudioService);
   private readonly engine = new ParticleEngine();
@@ -80,11 +81,12 @@ export class FreePlayComponent implements AfterViewInit, OnDestroy {
     const bounds = stage.getBoundingClientRect();
     this.welcomeVisible.set(false);
     this.engine.burst(event.clientX - bounds.left, event.clientY - bounds.top, RAINBOW_THEME, 7);
-    stage.focus();
+    this.mobileKeyboard.nativeElement.focus({ preventScroll: true });
     void this.enterFullscreen().finally(() => this.refreshPlaySurface());
   }
 
   returnHome(): void {
+    this.mobileKeyboard.nativeElement.blur();
     this.parentSequence = '';
     this.keysMashed.set(0);
     this.scorePopping.set(false);
@@ -126,6 +128,8 @@ export class FreePlayComponent implements AfterViewInit, OnDestroy {
     const numpadMatch = /^Numpad([0-9])$/.exec(code);
     return numpadMatch?.[1];
   }
+
+  clearKeyboardInput(): void { this.mobileKeyboard.nativeElement.value = ''; }
 
   private popScoreBadge(): void {
     this.scorePopping.set(false);

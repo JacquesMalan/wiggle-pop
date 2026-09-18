@@ -1,5 +1,6 @@
 <main class="playground" [class.is-dark]="darkMode()">
   <section #playground class="playground__stage" aria-label="Free play area" tabindex="0">
+    <input #mobileKeyboard class="playground__keyboard-input" type="text" inputmode="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" tabindex="-1" aria-label="Keyboard play input" (input)="clearKeyboardInput()" />
     <div class="playground__rising-dots" aria-hidden="true">
       <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>

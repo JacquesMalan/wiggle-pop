@@ -2,6 +2,7 @@
 .playground { --ink: #332543; --muted-ink: #695e78; --surface: #fff9df; --accent: #f45a8a; --accent-shadow: #b93e6a; position: fixed; inset: 0; overflow: hidden; background: radial-gradient(circle at 50% 12%, #fffef5 0, #fff5cf 48%, #fce0ef 100%); color: var(--ink); user-select: none; -webkit-user-select: none; transition: background 260ms ease, color 260ms ease; }
 .playground.is-dark { --ink: #fff7ee; --muted-ink: #e4d7ef; --surface: #251d38; --accent: #ff719d; --accent-shadow: #ba3e68; background: radial-gradient(circle at 50% 8%, #45345f 0, #27223d 48%, #151323 100%); }
 .playground__stage { position: absolute; inset: 0; overflow: hidden; touch-action: none; outline: none; }
+.playground__keyboard-input { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; opacity: 0; pointer-events: none; }
 .playground__canvas { position: relative; z-index: 2; display: block; width: 100%; height: 100%; }
 .playground__rising-dots { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
 .playground__rising-dots i { position: absolute; bottom: -72px; width: 18px; height: 18px; border-radius: 50%; background: #ff719d; opacity: .44; animation: rise 11s linear infinite; }
