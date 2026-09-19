@@ -1,0 +1,40 @@
+<main class="monster-page">
+  <nav class="monster-page__nav" aria-label="Game navigation">
+    <a class="monster-page__brand" routerLink="/" aria-label="Wiggle Pop home"><span aria-hidden="true">W</span></a>
+    <a class="monster-page__back" routerLink="/games">Games</a>
+  </nav>
+
+  <section class="monster-page__content" aria-labelledby="monster-title">
+    <p class="monster-page__eyebrow">Ages 4+ · Snack {{ roundNumber() }} of 5</p>
+    <h1 id="monster-title">Feed the <em>Monster</em></h1>
+    <div class="monster-page__request" aria-live="polite">{{ round().prompt }}</div>
+    <p class="monster-page__guide">Hold a snack, drag it to the monster, then let go.</p>
+
+    <div class="monster-page__playfield">
+      <div #monsterDropzone class="monster-page__monster" [class.is-feeding]="feeding()" aria-label="The hungry monster's mouth">
+        <div #monsterAnimation class="monster-page__animation" aria-hidden="true"></div>
+        @if (feeding()) { <span class="monster-page__chew" aria-live="polite">Nom nom nom!</span> }
+      </div>
+
+      <div class="monster-page__snacks" aria-label="Snacks to feed the monster">
+        @for (snack of round().snacks; track snack.id) {
+          <button class="monster-page__snack" type="button" [disabled]="feeding() || complete()" [class.is-dragged]="draggedId() === snack.id" [class.is-wobbly]="wobblyId() === snack.id" (pointerdown)="startDrag($event, snack)" (pointermove)="moveDrag($event)" (pointerup)="endDrag($event)" (pointercancel)="endDrag($event)" [attr.aria-label]="'Drag ' + snack.label + ' to the monster'">
+            <span aria-hidden="true">{{ snack.emoji }}</span>
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  @if (draggedSnack(); as dragged) {
+    @if (dragPosition(); as position) {
+      <div class="monster-page__drag-preview" [style.left.px]="position.x" [style.top.px]="position.y" aria-hidden="true">{{ dragged.emoji }}</div>
+    }
+  }
+
+  @if (complete()) {
+    <section class="monster-page__celebration" aria-live="assertive" aria-labelledby="monster-complete-title">
+      <div class="monster-page__celebration-card"><span aria-hidden="true">🎉 👾 🎊</span><p>Happy monster!</p><h2 id="monster-complete-title">Congratulations!</h2><p>You found every snack.</p><div><button type="button" (click)="playAgain()">Play again</button><a routerLink="/games">Back to games</a></div></div>
+    </section>
+  }
+</main>

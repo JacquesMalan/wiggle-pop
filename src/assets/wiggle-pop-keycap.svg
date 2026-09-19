@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <g transform="rotate(-7 32 32)">
+    <rect x="9" y="12" width="46" height="46" rx="13" fill="#21182e"/>
+    <rect x="9" y="8" width="46" height="46" rx="13" fill="#332543" stroke="#fffdf6" stroke-width="4"/>
+    <text x="32" y="43" fill="#fff9df" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-size="31" font-weight="900" text-anchor="middle">W</text>
+  </g>
+  <path d="M54 4l1.8 5.2L61 11l-5.2 1.8L54 18l-1.8-5.2L47 11l5.2-1.8z" fill="#f45a8a"/>
+</svg>

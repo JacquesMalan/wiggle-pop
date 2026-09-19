@@ -8,4 +8,4 @@ import { appRoutes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [provideIonicAngular(), provideRouter(appRoutes)]
-}).catch((error: unknown) => console.error('Toddler Play App could not start.', error));
+}).catch((error: unknown) => console.error('Wiggle Pop could not start.', error));

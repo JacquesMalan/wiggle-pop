@@ -1,4 +1,4 @@
-# Toddler Play App — Project Context
+# Wiggle Pop — Project Context
 
 ## 1. Project Overview
 
@@ -815,7 +815,7 @@ The first objective is to build one interaction that a young child wants to repe
 
 Use:
 
-Toddler Play App
+Wiggle Pop
 
 as the internal working name until the final product name has been selected.
 

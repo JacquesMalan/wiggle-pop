@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.toddlerplay.app',
-  appName: 'Toddler Play App',
+  appId: 'co.za.toddlerplay.wigglepop',
+  appName: 'Wiggle Pop',
   webDir: 'www'
 };
 

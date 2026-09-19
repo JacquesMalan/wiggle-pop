@@ -1,0 +1,39 @@
+<main class="pattern-page">
+  <nav class="pattern-page__nav" aria-label="Game navigation">
+    <a class="pattern-page__brand" routerLink="/" aria-label="Wiggle Pop home"><span aria-hidden="true">W</span></a>
+    <a class="pattern-page__back" routerLink="/games">Games</a>
+  </nav>
+
+  <section class="pattern-page__content" aria-labelledby="pattern-title">
+    <p class="pattern-page__eyebrow">{{ levelLabel() }} · {{ round().kind }} · Round {{ roundNumber() }} of 6</p>
+    <h1 id="pattern-title">Pattern <em>Pop</em></h1>
+    <p class="pattern-page__prompt">What comes next?</p>
+
+    <div class="pattern-page__sequence" aria-label="Pattern to complete">
+      @for (item of round().sequence; track $index) { <span>{{ item }}</span> }
+      <span class="pattern-page__missing" aria-label="Missing item">?</span>
+    </div>
+
+    <div class="pattern-page__options" aria-label="Choose what comes next">
+      @for (option of options(); track option; let optionIndex = $index) {
+        <button type="button" [disabled]="locked() || complete()" [class.is-correct]="correctOption() === option" [class.is-wobbly]="wobblyOption() === option" (click)="choose(option)" [attr.aria-label]="'Choice ' + (optionIndex + 1)">
+          <span aria-hidden="true">{{ option }}</span><small>{{ optionIndex + 1 }}</small>
+        </button>
+      }
+    </div>
+    <p class="pattern-page__keyboard">Tap a choice, or press 1, 2 or 3.</p>
+  </section>
+
+  @if (complete()) {
+    <section class="pattern-page__celebration" aria-live="assertive" aria-labelledby="pattern-complete-title">
+      <div class="pattern-page__confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="pattern-page__celebration-card">
+        <span aria-hidden="true">🎉 🧩 🎊</span>
+        <p>Pattern pro!</p>
+        <h2 id="pattern-complete-title">Congratulations!</h2>
+        <p>You finished every pattern.</p>
+        <div><button type="button" (click)="startNewGame()">Play again</button><a routerLink="/games">Back to games</a></div>
+      </div>
+    </section>
+  }
+</main>

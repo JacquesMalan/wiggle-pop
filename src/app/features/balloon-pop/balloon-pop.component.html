@@ -1,0 +1,66 @@
+<main class="balloon-page">
+  <nav class="balloon-page__nav" aria-label="Game navigation">
+    <a class="balloon-page__brand" routerLink="/" aria-label="Wiggle Pop home"><span aria-hidden="true">W</span></a>
+    <a class="balloon-page__back" routerLink="/games">Games</a>
+  </nav>
+
+  <header class="balloon-page__heading">
+    <p>For ages 4 and up</p>
+    <h1>Balloon <em>Pop</em></h1>
+    <span>Tap or press the matching key to pop every balloon.</span>
+  </header>
+
+  <section class="balloon-page__sky" aria-label="Balloon popping game">
+    <div class="balloon-page__cloud balloon-page__cloud--one" aria-hidden="true"></div>
+    <div class="balloon-page__cloud balloon-page__cloud--two" aria-hidden="true"></div>
+    @for (balloon of balloons(); track balloon.id) {
+      <button class="balloon" type="button" [class.is-popping]="balloon.popping" [style.--balloon-colour]="balloon.colour" [style.left.%]="balloon.left" [style.--float-duration.s]="balloon.duration" (click)="pop(balloon)" (animationend)="balloonEscaped(balloon)" [attr.aria-label]="'Pop ' + balloon.label + ' balloon'">
+        <span class="balloon__body">{{ balloon.value }}</span><span class="balloon__string" aria-hidden="true"></span>
+      </button>
+    }
+    @if (gameStarted()) {
+      <output class="balloon-page__popped" aria-live="polite">Wave {{ wave() }} <strong>{{ balloonsPopped() }} / {{ waveTarget() }}</strong></output>
+    }
+  </section>
+
+  @if (!gameStarted() && !waveComplete() && !waveFailed()) {
+    <section class="balloon-page__start" aria-labelledby="balloon-start-title">
+      <div>
+        <span aria-hidden="true">🎈</span>
+        <h2 id="balloon-start-title">Ready to pop?</h2>
+        <p>Wave 1 has 10 balloons.</p>
+        <button type="button" (click)="startWave()">Start Wave 1</button>
+      </div>
+    </section>
+  }
+
+  @if (waveComplete()) {
+    <section class="balloon-page__celebration" aria-live="assertive" aria-labelledby="balloon-complete-title">
+      <div class="balloon-page__confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="balloon-page__celebration-card">
+        <span aria-hidden="true">🎉 🎈 🎊</span>
+        <p>Wave {{ wave() }} complete!</p>
+        <h2 id="balloon-complete-title">Congratulations!</h2>
+        @if (finalWave()) {
+          <p>You popped all five waves!</p>
+          <div><button type="button" (click)="playAgain()">Play again</button><a routerLink="/games">Back to games</a></div>
+        } @else {
+          <p>Ready for Wave {{ wave() + 1 }}?</p>
+          <button type="button" (click)="nextWave()">Start Wave {{ wave() + 1 }}</button>
+        }
+      </div>
+    </section>
+  }
+
+  @if (waveFailed()) {
+    <section class="balloon-page__failure" aria-live="assertive" aria-labelledby="balloon-failed-title">
+      <div>
+        <span aria-hidden="true">🎈</span>
+        <p>So close!</p>
+        <h2 id="balloon-failed-title">Try Wave {{ wave() }} again</h2>
+        <p>Catch every balloon before it bounces away.</p>
+        <button type="button" (click)="startWave()">Try again</button>
+      </div>
+    </section>
+  }
+</main>

@@ -1,0 +1,17 @@
+<main class="splash-page">
+  <nav class="splash-page__nav" aria-label="Game navigation">
+    <a class="splash-page__brand" routerLink="/" aria-label="Wiggle Pop home"><span aria-hidden="true">W</span></a>
+    <div class="splash-page__actions"><button type="button" (click)="clearArtwork()" [disabled]="!marks().length">Clear</button><a routerLink="/games">Games</a></div>
+  </nav>
+
+  <header class="splash-page__heading">
+    <p>For little makers</p><h1>Colour <em>Splash</em></h1><span>Tap or press a key to make a picture.</span>
+  </header>
+
+  <section #artwork class="splash-page__artwork" aria-label="Colour Splash artwork area" tabindex="0">
+    <div class="splash-page__guide" [class.is-hidden]="marks().length" aria-hidden="true"><span>🎨</span><p>Tap anywhere!</p></div>
+    @for (mark of marks(); track mark.id) {
+      <span class="splash-mark splash-mark--{{ mark.kind }}" [style.left.%]="mark.x" [style.top.%]="mark.y" [style.--mark-colour]="mark.colour" [style.--mark-rotation]="mark.rotation" [style.--mark-size.px]="mark.size" aria-hidden="true">{{ mark.symbol }}</span>
+    }
+  </section>
+</main>

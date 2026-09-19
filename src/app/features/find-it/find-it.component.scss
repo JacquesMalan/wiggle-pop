@@ -1,0 +1,43 @@
+:host { display: block; height: 100%; }
+.find-page { --ink: #332543; --muted: #695e78; --pink: #f45a8a; --cream: #fff9df; position: fixed; inset: 0; overflow: auto; background: radial-gradient(circle at 12% 15%, #dff7ee 0, transparent 27%), radial-gradient(circle at 88% 30%, #ffe1ec 0, transparent 28%), #fff5cf; color: var(--ink); }
+.find-page__nav { display: flex; width: min(100% - 48px, 720px); align-items: center; justify-content: space-between; margin: 0 auto; padding: max(16px, env(safe-area-inset-top)) 0 6px; }
+.find-page__brand { display: grid; width: 42px; height: 42px; place-items: center; border: 3px solid #fffdf6; border-radius: 10px 12px 11px 13px; background: var(--ink); box-shadow: 0 4px 0 #21182e, 0 7px 12px rgba(51, 37, 67, .2); color: var(--cream); font: 950 25px/.9 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; letter-spacing: -.13em; text-decoration: none; rotate: -7deg; }
+.find-page__back { border: 2px solid rgba(51, 37, 67, .14); border-radius: 999px; padding: 10px 16px; color: var(--ink); font: 850 14px/1 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; text-decoration: none; }
+.find-page__brand:focus-visible, .find-page__back:focus-visible, .find-page__choices button:focus-visible, .find-page__celebration button:focus-visible, .find-page__celebration a:focus-visible { outline: 3px solid #5da4f3; outline-offset: 4px; }
+.find-page__content { width: min(100% - 40px, 480px); margin: 0 auto; padding: 4px 0 max(22px, env(safe-area-inset-bottom)); text-align: center; }
+.find-page__eyebrow { margin: 0; color: #8064b7; font-size: 12px; font-weight: 950; letter-spacing: .13em; text-transform: uppercase; }
+.find-page h1 { margin: 6px 0 9px; font: 950 clamp(40px, 7vw, 60px)/.88 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; letter-spacing: -.07em; }
+.find-page h1 em { color: var(--pink); font-style: normal; }
+.find-page__target { width: min(100%, 250px); margin: 0 auto 15px; border: 3px solid #fffdf6; border-radius: 24px; padding: 9px 15px 11px; background: #fff9df; box-shadow: 0 6px 0 rgba(51, 37, 67, .1), 0 11px 20px rgba(79, 52, 80, .1); }
+.find-page__target p { margin: 0 0 4px; color: var(--muted); font-size: 14px; font-weight: 850; }
+.find-page__target span { display: block; font-size: clamp(48px, 8vw, 64px); line-height: 1; }
+.find-page__choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(11px, 2.5vw, 16px); }
+.find-page__choices--six { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.find-page__choices button { display: grid; aspect-ratio: 1; place-items: center; border: 3px solid rgba(51, 37, 67, .1); border-radius: clamp(20px, 4vw, 28px); background: #fffdf6; box-shadow: 0 6px 0 rgba(51, 37, 67, .13), 0 11px 20px rgba(79, 52, 80, .1); cursor: pointer; transition: transform 160ms ease, background 160ms ease; }
+.find-page__choices button:hover { transform: translateY(-4px) rotate(-1deg); }
+.find-page__choices button:disabled { cursor: default; }
+.find-page__choices button span { font-size: clamp(50px, 11vw, 84px); line-height: 1; }
+.find-page__choices button.is-correct { border-color: #72d9c1; background: #e3f8f1; animation: found-pop 620ms ease both; }
+.find-page__choices button.is-wobbly { animation: gentle-wobble 460ms ease both; }
+.find-page__celebration { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; overflow: hidden; padding: 24px; background: rgba(51, 37, 67, .34); backdrop-filter: blur(3px); }
+.find-page__celebration-card { position: relative; z-index: 2; width: min(100%, 500px); border: 4px solid #fffdf6; border-radius: 36px; padding: clamp(28px, 6vw, 48px) 24px 28px; background: radial-gradient(circle at 50% 0, #fffef7 0, #fff5cf 70%); box-shadow: 0 11px 0 rgba(51, 37, 67, .16), 0 25px 55px rgba(30, 19, 44, .35); text-align: center; animation: celebration-pop 500ms cubic-bezier(.2, 1.15, .35, 1) both; }
+.find-page__celebration-card > span { display: block; margin-bottom: 15px; font-size: clamp(38px, 7vw, 57px); line-height: 1; }
+.find-page__celebration-card > p:first-of-type { margin: 0 0 6px; color: #8064b7; font-size: 13px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+.find-page__celebration h2 { margin: 0 0 11px; color: var(--pink); font: 950 clamp(37px, 8vw, 62px)/.88 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; letter-spacing: -.07em; }
+.find-page__celebration-card > p:not(:first-of-type) { margin: 0 0 22px; color: var(--muted); font-size: 17px; font-weight: 800; }
+.find-page__celebration-card > div { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px; }
+.find-page__celebration button, .find-page__celebration a { min-height: 52px; border: 0; border-radius: 999px; padding: 0 22px; background: var(--pink); box-shadow: 0 5px 0 #b93e6a; color: #fff; cursor: pointer; font: 900 16px/1 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; text-decoration: none; }
+.find-page__celebration a { display: inline-grid; place-items: center; background: #a987f2; box-shadow: 0 5px 0 #8064b7; }
+.find-page__confetti { position: absolute; inset: 0; pointer-events: none; }
+.find-page__confetti i { position: absolute; top: -36px; left: 8%; width: 11px; height: 23px; border-radius: 5px; background: #ff5f8f; animation: confetti-fall 2.7s cubic-bezier(.2, .7, .35, 1) infinite; }
+.find-page__confetti i:nth-child(2n) { left: 23%; width: 16px; height: 9px; background: #ffe66d; animation-delay: -.8s; } .find-page__confetti i:nth-child(3n) { left: 38%; background: #72d9c1; animation-delay: -1.6s; } .find-page__confetti i:nth-child(4n) { left: 53%; background: #a987f2; animation-delay: -2.1s; } .find-page__confetti i:nth-child(5) { left: 68%; } .find-page__confetti i:nth-child(6) { left: 82%; } .find-page__confetti i:nth-child(7) { left: 91%; } .find-page__confetti i:nth-child(8) { left: 14%; }
+@keyframes found-pop { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.1) rotate(2deg); } }
+@keyframes gentle-wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-4deg); } 75% { transform: rotate(4deg); } }
+@keyframes celebration-pop { from { opacity: 0; transform: scale(.85) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes confetti-fall { 0% { transform: translate3d(0, -8vh, 0) rotate(0); opacity: 0; } 12% { opacity: 1; } 100% { transform: translate3d(70px, 112vh, 0) rotate(540deg); opacity: 0; } }
+@media (max-width: 460px) { .find-page__nav, .find-page__content { width: min(100% - 30px, 650px); } .find-page__choices { gap: 11px; } .find-page__choices button { border-radius: 20px; } }
+@media (prefers-reduced-motion: reduce) { .find-page__choices button, .find-page__celebration-card, .find-page__confetti i { transition: none; animation: none; } .find-page__choices button:hover { transform: none; } }
+:host-context(html.dark-mode) .find-page { --ink: #fff7ee; --muted: #d8cde2; --cream: #2b233d; --pink: #ff719d; background: radial-gradient(circle at 12% 15%, #23434a 0, transparent 27%), radial-gradient(circle at 88% 30%, #493650 0, transparent 28%), #171425; }
+:host-context(html.dark-mode) .find-page__back { border-color: rgba(255, 247, 238, .17); background: #2b233d; }
+:host-context(html.dark-mode) .find-page__target, :host-context(html.dark-mode) .find-page__choices button, :host-context(html.dark-mode) .find-page__celebration-card { border-color: rgba(255, 247, 238, .18); background: #2b233d; }
+:host-context(html.dark-mode) .find-page__choices button.is-correct { background: #23434a; }

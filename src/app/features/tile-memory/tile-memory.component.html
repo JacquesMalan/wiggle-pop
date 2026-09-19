@@ -1,0 +1,36 @@
+<main class="memory-page">
+  <nav class="memory-page__nav" aria-label="Game navigation">
+    <a class="memory-page__brand" routerLink="/" aria-label="Wiggle Pop home"><span aria-hidden="true">W</span></a>
+    <a class="memory-page__back" routerLink="/games">Games</a>
+  </nav>
+
+  <section class="memory-page__content" aria-labelledby="memory-title">
+    <p class="memory-page__eyebrow">{{ level().label }}</p>
+    <h1 id="memory-title">Tile <em>Memory</em></h1>
+    <p class="memory-page__intro">Turn over the animal tiles and find the matching friends.</p>
+
+    <div class="memory-board" [style.--memory-columns]="level().columns" aria-label="Animal memory board">
+      @for (card of cards(); track card.id) {
+        <button class="memory-card" type="button" [class.is-face-up]="card.faceUp || card.matched" [class.is-matched]="card.matched" [disabled]="locked() || card.faceUp || card.matched" (click)="reveal(card)" [attr.aria-label]="card.faceUp || card.matched ? card.name : 'Turn over a memory tile'">
+          <span class="memory-card__inner"><span class="memory-card__front" aria-hidden="true">?</span><span class="memory-card__back" aria-hidden="true">{{ card.animal }}</span></span>
+        </button>
+      }
+    </div>
+
+    @if (complete()) {
+      <section class="memory-page__celebration" aria-live="assertive" aria-labelledby="complete-title">
+        <div class="memory-page__confetti" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="memory-page__sparkles" aria-hidden="true"><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span></div>
+        <div class="memory-page__celebration-card">
+          <span class="memory-page__poppers" aria-hidden="true">🎉 <b>🎊</b> 🎉</span>
+          <p class="memory-page__yay">Hooray!</p>
+          <h2 id="complete-title">Congratulations!</h2>
+          <p>You found every matching friend.</p>
+          <div><button type="button" (click)="startNewGame()">Play again</button><a routerLink="/games">Back to games</a></div>
+        </div>
+      </section>
+    }
+  </section>
+</main>

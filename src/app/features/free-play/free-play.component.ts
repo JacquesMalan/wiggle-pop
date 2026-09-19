@@ -5,6 +5,7 @@ import { RAINBOW_THEME } from '../../content/themes';
 import { ParticleEngine } from '../../core/engines/particle-engine';
 import { AudioService } from '../../core/services/audio.service';
 import { InteractionService } from '../../core/services/interaction.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-free-play',
@@ -21,11 +22,11 @@ export class FreePlayComponent implements AfterViewInit, OnDestroy {
   @ViewChild('mobileKeyboard', { static: true }) private readonly mobileKeyboard!: ElementRef<HTMLInputElement>;
   private readonly interaction = inject(InteractionService);
   private readonly audio = inject(AudioService);
+  readonly theme = inject(ThemeService);
   private readonly engine = new ParticleEngine();
   private readonly subscriptions = new Subscription();
   private unbind?: () => void;
   private lastTrailAt = 0;
-  readonly darkMode = signal(false);
   readonly welcomeVisible = signal(true);
   readonly keysMashed = signal(0);
   readonly scoreMood = computed(() => FreePlayComponent.SCORE_MOODS[Math.min(Math.floor(this.keysMashed() / 50), FreePlayComponent.SCORE_MOODS.length - 1)]);
@@ -74,7 +75,7 @@ export class FreePlayComponent implements AfterViewInit, OnDestroy {
     if (this.scorePopTimer) clearTimeout(this.scorePopTimer);
   }
 
-  toggleDarkMode(): void { this.darkMode.update((enabled) => !enabled); }
+  toggleDarkMode(): void { this.theme.toggle(); }
 
   startSmashing(event: MouseEvent): void {
     const stage = this.playground.nativeElement;

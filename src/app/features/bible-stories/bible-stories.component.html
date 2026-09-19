@@ -1,0 +1,42 @@
+<main class="stories-page">
+  <nav class="stories-page__nav" aria-label="Main navigation">
+    <a class="stories-page__brand" routerLink="/" aria-label="Wiggle Pop home">W</a>
+    <div class="stories-page__nav-links"><a routerLink="/games">Games</a><a routerLink="/for-parents">For Parents</a><a routerLink="/">Home</a></div>
+  </nav>
+
+  <section class="stories-page__hero" aria-labelledby="stories-title">
+    <div class="stories-page__hero-copy">
+      <p class="stories-page__eyebrow">Stories to wonder about</p>
+      <h1 id="stories-title">Big stories.<br><em>Little hearts.</em></h1>
+      <p>Come along for gentle Bible stories filled with courage, kindness, wonder and hope.</p>
+    </div>
+    <div class="stories-page__hero-picture" aria-hidden="true"><span>☀️</span><i>☁️</i><b>🕊️</b><strong>🌈</strong></div>
+  </section>
+
+  <section class="stories-page__welcome" aria-labelledby="welcome-title">
+    <span aria-hidden="true">✨</span>
+    <div><p>Made for little listeners</p><h2 id="welcome-title">Choose a story and snuggle in.</h2></div>
+    <span aria-hidden="true">✨</span>
+  </section>
+
+  <section class="stories-page__collection" aria-labelledby="collection-title">
+    <div class="stories-page__heading"><p>Story shelf</p><h2 id="collection-title">Start exploring</h2></div>
+    <div class="stories-page__grid">
+      @for (story of stories; track story.title) {
+        <article class="story-card" [class]="'story-card story-card--' + story.colour">
+          <div class="story-card__picture" aria-hidden="true">{{ story.emoji }}</div>
+          <p class="story-card__reference">{{ story.reference }}</p>
+          <h3>{{ story.title }}</h3>
+          <p>{{ story.description }}</p>
+          <span class="story-card__soon">Story coming soon <b aria-hidden="true">→</b></span>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="stories-page__closing" aria-labelledby="closing-title">
+    <div aria-hidden="true">📖</div>
+    <p>More little adventures are on their way.</p>
+    <h2 id="closing-title">There is always room for one more story.</h2>
+  </section>
+</main>

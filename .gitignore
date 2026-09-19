@@ -1,5 +1,7 @@
 node_modules/
 www/
 .angular/
-android/
 *.log
+android/keystore.properties
+android/**/*.jks
+android/**/*.keystore

@@ -1,0 +1,52 @@
+:host { display: block; height: 100%; }
+.balloon-page { --ink: #332543; --muted: #695e78; --cream: #fff9df; --pink: #f45a8a; position: fixed; inset: 0; overflow: hidden; background: linear-gradient(#bcecff 0, #e5f9ff 61%, #fff5cf 100%); color: var(--ink); }
+.balloon-page__nav { position: relative; z-index: 5; display: flex; width: min(100% - 48px, 920px); align-items: center; justify-content: space-between; margin: 0 auto; padding: max(20px, env(safe-area-inset-top)) 0 10px; }
+.balloon-page__brand { display: grid; width: 42px; height: 42px; place-items: center; border: 3px solid #fffdf6; border-radius: 10px 12px 11px 13px; background: var(--ink); box-shadow: 0 4px 0 #21182e, 0 7px 12px rgba(51, 37, 67, .2); color: var(--cream); font: 950 25px/.9 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; letter-spacing: -.13em; text-decoration: none; rotate: -7deg; }
+.balloon-page__back { border: 2px solid rgba(51, 37, 67, .14); border-radius: 999px; padding: 10px 16px; background: rgba(255, 253, 246, .7); color: var(--ink); font: 850 14px/1 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; text-decoration: none; }
+.balloon-page__brand:focus-visible, .balloon-page__back:focus-visible, .balloon:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.balloon-page__heading { position: relative; z-index: 4; width: min(100% - 42px, 620px); margin: 4px auto 0; text-align: center; }
+.balloon-page__heading p { margin: 0; color: #8064b7; font-size: 12px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+.balloon-page__heading h1 { margin: 7px 0 9px; font: 950 clamp(42px, 7vw, 68px)/.88 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; letter-spacing: -.07em; }
+.balloon-page__heading h1 em { color: var(--pink); font-style: normal; }
+.balloon-page__heading span { color: var(--muted); font-size: 16px; font-weight: 800; line-height: 1.35; }
+.balloon-page__sky { position: absolute; z-index: 1; inset: 0; overflow: hidden; }
+.balloon-page__cloud { position: absolute; width: 150px; height: 42px; border-radius: 999px; background: rgba(255, 255, 255, .7); filter: blur(.2px); }
+.balloon-page__cloud::before, .balloon-page__cloud::after { position: absolute; bottom: 0; border-radius: 50%; background: inherit; content: ''; }
+.balloon-page__cloud::before { left: 28px; width: 58px; height: 58px; } .balloon-page__cloud::after { right: 23px; width: 48px; height: 48px; }
+.balloon-page__cloud--one { top: 26%; left: -52px; } .balloon-page__cloud--two { top: 49%; right: -57px; transform: scale(.75); }
+.balloon { position: absolute; z-index: 2; bottom: -155px; width: clamp(74px, 11vw, 116px); aspect-ratio: .82; border: 0; padding: 0; background: transparent; cursor: pointer; animation: balloon-float var(--float-duration) linear both; }
+.balloon__body { position: relative; display: grid; width: 100%; height: 100%; place-items: center; border: 3px solid rgba(255, 255, 255, .68); border-radius: 50% 50% 48% 48%; background: var(--balloon-colour); box-shadow: inset -10px -13px 0 rgba(74, 45, 93, .11), 0 7px 0 rgba(51, 37, 67, .13), 0 12px 22px rgba(51, 37, 67, .15); color: #fffdf6; font: 950 clamp(28px, 5vw, 47px)/1 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; text-shadow: 0 3px 0 rgba(51, 37, 67, .18); }
+.balloon__body::after { position: absolute; bottom: -11px; left: calc(50% - 10px); border-width: 12px 10px 0; border-style: solid; border-color: var(--balloon-colour) transparent transparent; content: ''; }
+.balloon__string { position: absolute; top: calc(100% + 8px); left: 50%; width: 2px; height: 45px; background: rgba(51, 37, 67, .45); transform: rotate(7deg); transform-origin: top; }
+.balloon.is-popping { pointer-events: none; animation: balloon-pop 330ms ease-out both; }
+.balloon.is-popping .balloon__body { animation: balloon-burst 330ms ease-out both; }
+.balloon-page__popped { position: absolute; z-index: 3; bottom: max(24px, env(safe-area-inset-bottom)); left: 50%; border: 2px solid rgba(51, 37, 67, .13); border-radius: 999px; padding: 10px 16px; background: rgba(255, 253, 246, .79); box-shadow: 0 4px 0 rgba(51, 37, 67, .1); color: var(--muted); font: 850 14px/1 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; transform: translateX(-50%); }
+.balloon-page__popped strong { color: var(--pink); font-size: 19px; }
+.balloon-page__start, .balloon-page__celebration, .balloon-page__failure { position: fixed; z-index: 10; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(51, 37, 67, .3); backdrop-filter: blur(3px); }
+.balloon-page__start > div, .balloon-page__celebration-card, .balloon-page__failure > div { width: min(100%, 470px); border: 4px solid #fffdf6; border-radius: 36px; padding: clamp(30px, 6vw, 48px) 24px; background: radial-gradient(circle at 50% 0, #fffef7 0, #fff5cf 72%); box-shadow: 0 11px 0 rgba(51, 37, 67, .16), 0 25px 55px rgba(30, 19, 44, .35); text-align: center; animation: celebration-pop 480ms cubic-bezier(.2, 1.15, .35, 1) both; }
+.balloon-page__start span, .balloon-page__celebration-card > span, .balloon-page__failure span { display: block; margin-bottom: 14px; font-size: clamp(42px, 9vw, 66px); line-height: 1; }
+.balloon-page__start h2, .balloon-page__celebration h2, .balloon-page__failure h2 { margin: 0 0 10px; font: 950 clamp(34px, 7vw, 54px)/.9 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; letter-spacing: -.07em; }
+.balloon-page__start p, .balloon-page__celebration p, .balloon-page__failure p { margin: 0 0 23px; color: var(--muted); font-size: 17px; font-weight: 800; }
+.balloon-page__celebration-card > p:first-of-type { margin-bottom: 7px; color: #8064b7; font-size: 13px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+.balloon-page__celebration h2 { color: var(--pink); }
+.balloon-page__failure > div { background: radial-gradient(circle at 50% 0, #fffef7 0, #ffe2e9 72%); }
+.balloon-page__failure > div > p:first-of-type { margin-bottom: 6px; color: #8064b7; font-size: 13px; font-weight: 950; letter-spacing: .14em; text-transform: uppercase; }
+.balloon-page__failure h2 { color: #ef3e68; }
+.balloon-page__start button, .balloon-page__celebration button, .balloon-page__celebration a, .balloon-page__failure button { min-height: 62px; border: 0; border-radius: 999px; padding: 0 31px; background: #ef3e68; box-shadow: 0 7px 0 #ad2549, 0 15px 24px rgba(173, 37, 73, .3); color: #fff; cursor: pointer; font: 950 19px/1 ui-rounded, 'Arial Rounded MT Bold', system-ui, sans-serif; text-decoration: none; }
+.balloon-page__celebration-card > div { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.balloon-page__celebration a { display: inline-grid; place-items: center; min-height: 52px; background: #a987f2; box-shadow: 0 5px 0 #8064b7; font-size: 16px; }
+.balloon-page__confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.balloon-page__confetti i { position: absolute; top: -34px; left: 9%; width: 11px; height: 23px; border-radius: 5px; background: #ff5f8f; animation: confetti-fall 2.7s cubic-bezier(.2, .7, .35, 1) infinite; }
+.balloon-page__confetti i:nth-child(2n) { left: 23%; width: 16px; height: 9px; background: #ffe66d; animation-delay: -.8s; } .balloon-page__confetti i:nth-child(3n) { left: 38%; background: #72d9c1; animation-delay: -1.6s; } .balloon-page__confetti i:nth-child(4n) { left: 53%; background: #a987f2; animation-delay: -2.1s; } .balloon-page__confetti i:nth-child(5) { left: 68%; } .balloon-page__confetti i:nth-child(6) { left: 82%; } .balloon-page__confetti i:nth-child(7) { left: 91%; } .balloon-page__confetti i:nth-child(8) { left: 14%; }
+@keyframes balloon-float { 0% { transform: translateY(0) rotate(-5deg); } 68% { transform: translate(20px, -99vh) rotate(6deg); } 74% { transform: translate(24px, -94vh) rotate(10deg); } 80% { transform: translate(18px, -99vh) rotate(4deg); } 86% { transform: translate(14px, -94vh) rotate(-3deg); } 92% { transform: translate(19px, -99vh) rotate(5deg); } 98% { transform: translate(23px, -94vh) rotate(9deg); } 100% { transform: translate(18px, -99vh) rotate(4deg); } }
+@keyframes balloon-pop { to { transform: scale(1.55); opacity: 0; } }
+@keyframes balloon-burst { 30% { transform: scale(1.2); } 100% { transform: scale(.1); opacity: 0; } }
+@keyframes celebration-pop { from { opacity: 0; transform: scale(.85) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes confetti-fall { 0% { transform: translate3d(0, -8vh, 0) rotate(0); opacity: 0; } 12% { opacity: 1; } 100% { transform: translate3d(70px, 112vh, 0) rotate(540deg); opacity: 0; } }
+@media (max-width: 540px) { .balloon-page__nav { width: min(100% - 32px, 920px); } .balloon-page__heading { margin-top: 7px; } .balloon-page__heading span { font-size: 14px; } .balloon { width: clamp(65px, 21vw, 90px); } }
+@media (prefers-reduced-motion: reduce) { .balloon { animation-duration: 13s; } .balloon.is-popping, .balloon.is-popping .balloon__body { animation: none; opacity: 0; } .balloon-page__start > div, .balloon-page__celebration-card, .balloon-page__confetti i { animation: none; } }
+:host-context(html.dark-mode) .balloon-page { --ink: #fff7ee; --muted: #d8cde2; --cream: #2b233d; --pink: #ff719d; background: linear-gradient(#182c47 0, #1f3d58 61%, #171425 100%); }
+:host-context(html.dark-mode) .balloon-page__back, :host-context(html.dark-mode) .balloon-page__popped { border-color: rgba(255, 247, 238, .17); background: #2b233d; }
+:host-context(html.dark-mode) .balloon-page__cloud { background: rgba(255, 255, 255, .18); }
+:host-context(html.dark-mode) .balloon-page__start > div, :host-context(html.dark-mode) .balloon-page__celebration-card { border-color: rgba(255, 247, 238, .2); background: #2b233d; }
+:host-context(html.dark-mode) .balloon-page__failure > div { background: #3c2638; }

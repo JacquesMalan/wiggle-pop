@@ -1,0 +1,37 @@
+<main class="find-page">
+  <nav class="find-page__nav" aria-label="Game navigation">
+    <a class="find-page__brand" routerLink="/" aria-label="Wiggle Pop home"><span aria-hidden="true">W</span></a>
+    <a class="find-page__back" routerLink="/games">Games</a>
+  </nav>
+
+  <section class="find-page__content" aria-labelledby="find-title">
+    <p class="find-page__eyebrow">{{ level().label }} · Round {{ round() }} of 5</p>
+    <h1 id="find-title">Find <em>It!</em></h1>
+    @if (target(); as animal) {
+      <div class="find-page__target" aria-label="Find this animal">
+        <p>Can you find this one?</p><span aria-hidden="true">{{ animal.emoji }}</span>
+      </div>
+    }
+
+    <div class="find-page__choices" [class.find-page__choices--six]="level().choices === 6" aria-label="Choose the matching animal">
+      @for (animal of choices(); track animal.id) {
+        <button type="button" [disabled]="locked() || complete()" [class.is-correct]="correctId() === animal.id" [class.is-wobbly]="wobblyId() === animal.id" (click)="choose(animal)" [attr.aria-label]="animal.name">
+          <span aria-hidden="true">{{ animal.emoji }}</span>
+        </button>
+      }
+    </div>
+  </section>
+
+  @if (complete()) {
+    <section class="find-page__celebration" aria-live="assertive" aria-labelledby="find-complete-title">
+      <div class="find-page__confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="find-page__celebration-card">
+        <span aria-hidden="true">🎉 🔎 🎊</span>
+        <p>Five finds!</p>
+        <h2 id="find-complete-title">Congratulations!</h2>
+        <p>You found every animal.</p>
+        <div><button type="button" (click)="startNewGame()">Play again</button><a routerLink="/games">Back to games</a></div>
+      </div>
+    </section>
+  }
+</main>

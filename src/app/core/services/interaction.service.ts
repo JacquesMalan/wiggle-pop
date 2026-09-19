@@ -13,6 +13,9 @@ export interface PlayPointerEvent {
 export interface PlayKeyEvent {
   key: string;
   code: string;
+  ctrlKey: boolean;
+  metaKey: boolean;
+  altKey: boolean;
   timeStamp: number;
 }
 
@@ -46,7 +49,7 @@ export class InteractionService {
       // firmware actions (brightness, device lock, etc.) are intentionally outside
       // a web page's control and may not reach this handler.
       if (/^F(?:[1-9]|1[0-2])$/.test(event.key) && event.cancelable) event.preventDefault();
-      this.keyDownSubject.next({ key: event.key, code: event.code, timeStamp: event.timeStamp });
+      this.keyDownSubject.next({ key: event.key, code: event.code, ctrlKey: event.ctrlKey, metaKey: event.metaKey, altKey: event.altKey, timeStamp: event.timeStamp });
     };
     const listeners: ReadonlyArray<readonly [EventTarget, string, EventListener]> = [
       [target, 'pointerdown', pointer('down') as EventListener], [target, 'pointermove', pointer('move') as EventListener],

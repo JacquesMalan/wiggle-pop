@@ -1,0 +1,72 @@
+<main class="games-page">
+  <nav class="games-page__nav" aria-label="Main navigation">
+    <a class="games-page__brand" routerLink="/" aria-label="Wiggle Pop home"><span aria-hidden="true">W</span></a>
+    <a class="games-page__home-link" routerLink="/">Home</a>
+  </nav>
+
+  <section class="games-page__intro" aria-labelledby="games-title">
+    <p class="games-page__eyebrow">Play your way</p>
+    <h1 id="games-title">Little games,<br><em>big smiles.</em></h1>
+    <p>Choose an age, then find a game made for curious hands and bright ideas.</p>
+  </section>
+
+  <section class="games-page__filters" aria-labelledby="age-filter-title">
+    <h2 id="age-filter-title">Choose an age</h2>
+    <div class="games-page__filter-list" role="group" aria-label="Filter games by age">
+      @for (filter of ageFilters; track filter.id) {
+        <button type="button" [class.is-selected]="selectedAge() === filter.id" [attr.aria-pressed]="selectedAge() === filter.id" (click)="selectAge(filter.id)">{{ filter.label }}</button>
+      }
+    </div>
+  </section>
+
+  @if (freePlayGames().length) {
+    <section class="games-page__category" aria-labelledby="free-play-title">
+      <div class="games-page__category-heading">
+        <p>Play style</p><h2 id="free-play-title">Free Play</h2>
+      </div>
+      <div class="games-page__grid">
+        @for (game of freePlayGames(); track game.route) {
+          <a class="game-tile" [routerLink]="game.route" [queryParams]="selectedAge() === 'all' ? undefined : { age: selectedAge() }" [attr.aria-label]="'Play ' + game.title">
+            <span class="game-tile__picture" aria-hidden="true">{{ game.emoji }}</span>
+            <span class="game-tile__content"><strong>{{ game.title }}</strong><span>{{ game.description }}</span><small>For ages {{ game.ages.join(', ') }}</small></span>
+            <span class="game-tile__arrow" aria-hidden="true">→</span>
+          </a>
+        }
+      </div>
+    </section>
+  }
+
+  <section class="games-page__category" aria-labelledby="memory-title">
+    <div class="games-page__category-heading">
+      <p>Play style</p><h2 id="memory-title">Memory</h2>
+    </div>
+    <div class="games-page__grid">
+      @for (game of memoryGames(); track game.route) {
+        <a class="game-tile" [routerLink]="game.route" [queryParams]="selectedAge() === 'all' ? undefined : { age: selectedAge() }" [attr.aria-label]="'Play ' + game.title">
+          <span class="game-tile__picture" aria-hidden="true">{{ game.emoji }}</span>
+          <span class="game-tile__content"><strong>{{ game.title }}</strong><span>{{ game.description }}</span><small>For ages {{ game.ages.join(', ') }}</small></span>
+          <span class="game-tile__arrow" aria-hidden="true">→</span>
+        </a>
+      } @empty {
+        <p class="games-page__empty">More games are wiggling their way here soon.</p>
+      }
+    </div>
+  </section>
+
+  @if (popGames().length) {
+    <section class="games-page__category" aria-labelledby="pop-play-title">
+      <div class="games-page__category-heading">
+        <p>Play style</p><h2 id="pop-play-title">Pop &amp; Play</h2>
+      </div>
+      <div class="games-page__grid">
+        @for (game of popGames(); track game.route) {
+          <a class="game-tile" [routerLink]="game.route" [queryParams]="selectedAge() === 'all' ? undefined : { age: selectedAge() }" [attr.aria-label]="'Play ' + game.title">
+            <span class="game-tile__picture" aria-hidden="true">{{ game.emoji }}</span>
+            <span class="game-tile__content"><strong>{{ game.title }}</strong><span>{{ game.description }}</span><small>For ages {{ game.ages.join(', ') }}</small></span>
+            <span class="game-tile__arrow" aria-hidden="true">→</span>
+          </a>
+        }
+      </div>
+    </section>
+  }
+</main>

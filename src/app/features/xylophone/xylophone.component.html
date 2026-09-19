@@ -1,0 +1,25 @@
+<main class="xylophone-page">
+  <nav class="xylophone-page__nav" aria-label="Game navigation"><a class="xylophone-page__brand" routerLink="/" aria-label="Wiggle Pop home">W</a><a class="xylophone-page__back" routerLink="/games">Games</a></nav>
+  <section class="xylophone-page__content" aria-labelledby="xylophone-title">
+    <p class="xylophone-page__eyebrow">Ages 4+ · Follow me</p><h1 id="xylophone-title">Make some <em>music</em></h1>
+    @if (phase() === 'picking') {
+      <h2 class="xylophone-page__picker-title">🎵 Pick a song</h2>
+      <div class="xylophone-page__song-list">
+        @for (song of songs; track song.id) { <button type="button" (click)="selectSong(song)"><span aria-hidden="true">{{ song.emoji }}</span><strong>{{ song.title }}</strong></button> }
+      </div>
+    } @else if (selectedSong(); as song) {
+      <p class="xylophone-page__song-name">{{ song.emoji }} {{ song.title }}</p>
+      @if (phase() === 'choosing-mode') {
+        <p class="xylophone-page__message">How would you like to play?</p>
+        <div class="xylophone-page__modes"><button type="button" (click)="showMe()"><span>▶</span><strong>Show Me</strong><small>Watch the bars glow and bounce.</small></button><button type="button" (click)="myTurn()"><span>🎵</span><strong>My Turn</strong><small>Follow one glowing bar at a time.</small></button></div>
+        <button class="xylophone-page__change" type="button" (click)="pickAnotherSong()">Pick another song</button>
+      } @else {
+        <p class="xylophone-page__message">{{ phase() === 'listening' ? 'Listen to the glowing bars!' : phase() === 'complete' ? 'You made music! ⭐' : 'Your turn! Play the glowing bar.' }}</p>
+        <div class="xylophone-page__bars" aria-label="Xylophone keys">
+          @for (note of notes; track note.id) { <button type="button" [style.--bar-colour]="note.colour" [class.is-active]="activeNote() === note.id" [class.is-next]="phase() === 'playing' && note.id === song.notes[progress()]" [class.is-hinted]="hintedNote() === note.id" (click)="play(note)" [attr.aria-label]="'Play ' + note.name + ', key ' + note.key"><span class="xylophone-page__icon" aria-hidden="true">{{ note.icon }}</span><strong>{{ note.name }}</strong><kbd>{{ note.key }}</kbd></button> }
+        </div>
+        @if (phase() === 'complete') { <div class="xylophone-page__actions"><button type="button" (click)="showMe()">Show me again</button><button type="button" (click)="myTurn()">My turn again</button><button type="button" (click)="pickAnotherSong()">Pick a song</button></div> } @else if (phase() === 'playing') { <div class="xylophone-page__turn-actions"><button type="button" (click)="showHint()">💡 Need a hint?</button><button class="xylophone-page__change" type="button" (click)="pickAnotherSong()">Pick another song</button></div> }
+      }
+    }
+  </section>
+</main>
