@@ -1,6 +1,6 @@
 <main class="playground" [class.is-dark]="theme.darkMode()">
   <section #playground class="playground__stage" aria-label="Free play area" tabindex="0">
-    <input #mobileKeyboard class="playground__keyboard-input" type="text" inputmode="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" tabindex="-1" aria-label="Keyboard play input" (input)="clearKeyboardInput()" />
+    <input #mobileKeyboard class="playground__keyboard-input" type="text" inputmode="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" tabindex="-1" aria-label="Keyboard play input" (beforeinput)="handleMobileKeyboardBeforeInput($event)" (input)="handleMobileKeyboardInput($event)" />
     <div class="playground__rising-dots" aria-hidden="true">
       <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>
@@ -54,9 +54,29 @@
         <span>keys mashed: <strong>{{ keysMashed() }}</strong></span>
       </span>
     </output>
-    <button class="playground__parents" type="button" (dblclick)="returnHome()" aria-label="Parents: double click to return home">
+    <button class="playground__parents" type="button" (dblclick)="finishSmashing()" aria-label="Parents: double click to see the score summary">
       <strong>Parents</strong>
-      <span>Double click here to return to home, or type P A R E N T.</span>
+      <span>Double click here, or type P A R E N T, to see the score.</span>
     </button>
+    @if (scoreSummary(); as summary) {
+      <section class="playground__summary-modal" role="dialog" aria-modal="true" aria-labelledby="score-summary-title" aria-live="polite">
+        <div class="playground__summary">
+          <div class="playground__summary-heading">
+            <span aria-hidden="true">&#128517;</span>
+            <h2 id="score-summary-title">Score Summary</h2>
+          </div>
+          <dl class="playground__summary-stats">
+            <div><dt>Score:</dt><dd><strong>{{ summary.score }}</strong> {{ summary.score === 1 ? 'key smashed' : 'keys smashed' }}</dd></div>
+            <div><dt>Duration:</dt><dd><strong>{{ summary.durationSeconds }}</strong> {{ summary.durationSeconds === 1 ? 'second' : 'seconds' }}</dd></div>
+            <div><dt>Chaos level:</dt><dd class="playground__summary-chaos">{{ summary.chaosLevel }}</dd></div>
+          </dl>
+          <p class="playground__summary-message">This is chaos</p>
+          <div class="playground__summary-actions">
+            <button class="playground__summary-restart" type="button" (click)="keepSmashing()"><span aria-hidden="true">&#8635;</span> Keep smashing</button>
+            <button class="playground__summary-home" type="button" (click)="returnHome()">Return home</button>
+          </div>
+        </div>
+      </section>
+    }
   }
 </main>

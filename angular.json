@@ -13,7 +13,12 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [{ "glob": "**/*", "input": "src/assets", "output": "assets" }],
+            "assets": [
+              { "glob": "**/*", "input": "src/assets", "output": "assets" },
+              { "glob": ".htaccess", "input": ".", "output": "." },
+              { "glob": "sitemap.xml", "input": "src", "output": "." },
+              { "glob": "robots.txt", "input": "src", "output": "." }
+            ],
             "styles": ["src/global.scss"],
             "outputPath": { "base": "www", "browser": "" }
           },

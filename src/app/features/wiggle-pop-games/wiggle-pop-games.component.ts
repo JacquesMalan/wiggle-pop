@@ -51,6 +51,9 @@ export class WigglePopGamesComponent implements OnDestroy {
   }, {
     title: 'Colour Splash', description: 'Tap, press and make your very own colourful picture.', category: 'Free Play',
     ages: ['2-3'], emoji: '🎨', route: '/games/colour-splash'
+  }, {
+    title: 'Color Match', description: 'Match colourful little objects to their basket.', category: 'Pop & Play',
+    ages: ['2-3'], emoji: '🧺', route: '/games/color-match'
   }];
   readonly visibleGames = computed(() => this.games.filter((game) => this.selectedAge() === 'all' || game.ages.includes(this.selectedAge() as Exclude<AgeFilter, 'all'>)));
   readonly memoryGames = computed(() => this.visibleGames().filter((game) => game.category === 'Memory'));

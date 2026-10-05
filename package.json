@@ -5,6 +5,7 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
+    "ionic:build": "ng run wiggle-pop:build",
     "test": "ng test --watch=false",
     "cap:sync:android": "cap sync android"
   },
